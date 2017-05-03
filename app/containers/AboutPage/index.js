@@ -11,6 +11,7 @@ export class AboutPage extends React.Component { // eslint-disable-line react/pr
   render() {
     return (
       <div>
+        <h1>About Page</h1>
       </div>
     );
   }

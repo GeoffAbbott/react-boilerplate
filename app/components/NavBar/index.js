@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 import NavItem from 'components/NavItem';
 import Logo from './logo.png';
@@ -31,7 +32,9 @@ function NavBar() {
   return (
     <HeaderWrap>
       <LogoWrap className="logo-wrap">
-        <Img src={Logo} alt="CollegeBand Logo" />
+        <Link to="/">
+          <Img src={Logo} alt="CollegeBand Logo" />
+        </Link>
       </LogoWrap>
       <Nav>
         <NavItem title="Charts" href="/charts" />
