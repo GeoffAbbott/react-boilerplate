@@ -26,16 +26,13 @@ export default function createRoutes(store) {
           import('containers/HomePage/sagas'),
           import('containers/HomePage'),
         ]);
-
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('home', reducer.default);
           injectSagas(sagas.default);
-
           renderRoute(component);
         });
-
         importModules.catch(errorLoading);
       },
     }, {
@@ -43,6 +40,14 @@ export default function createRoutes(store) {
       name: 'features',
       getComponent(nextState, cb) {
         import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
+      path: '/shop',
+      name: 'product',
+      getComponent(location, cb) {
+        import('components/Product')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
