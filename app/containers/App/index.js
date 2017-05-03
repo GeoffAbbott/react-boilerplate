@@ -12,6 +12,25 @@
  */
 
 import React from 'react';
+import styled from 'styled-components';
+
+import NavBar from 'components/NavBar';
+import PromoBar from 'components/PromoBar';
+import Footer from 'components/Footer';
+
+const AppWrapper = styled.div`
+
+`;
+
+const MainCol = styled.div`
+  max-width: calc(1200px + 16px * 2);
+  margin: 0 auto;
+  display: flex;
+  min-height: 100%;
+  padding: 0 16px;
+  flex-direction: column;
+  min-height:100vh;
+`;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -21,9 +40,14 @@ export default class App extends React.PureComponent { // eslint-disable-line re
 
   render() {
     return (
-      <div>
-        {React.Children.toArray(this.props.children)}
-      </div>
+      <AppWrapper>
+        <PromoBar />
+        <MainCol>
+          <NavBar />
+          {React.Children.toArray(this.props.children)}
+        </MainCol>
+        <Footer />
+      </AppWrapper>
     );
   }
 }

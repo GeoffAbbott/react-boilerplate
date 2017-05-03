@@ -9,22 +9,30 @@ injectGlobal`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans',sans-serif;
   }
 
   body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans',sans-serif;
+  }
+  
+  .cb-grey{
+    color: #51595d !important;
   }
 
   #app {
-    background-color: #fafafa;
     min-height: 100%;
     min-width: 100%;
   }
 
   p,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Open Sans',sans-serif;
     line-height: 1.5em;
+  }
+  ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 `;
