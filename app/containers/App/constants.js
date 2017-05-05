@@ -10,3 +10,4 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const TAG_LINE = 'Let\'s get the band back together';

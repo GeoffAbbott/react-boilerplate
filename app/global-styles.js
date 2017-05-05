@@ -7,7 +7,9 @@ injectGlobal`
     height: 100%;
     width: 100%;
   }
-
+  img{
+    width:100%;
+  }
   body {
     font-family: 'Open Sans',sans-serif;
   }

@@ -8,8 +8,6 @@ import React from 'react';
 import styled from 'styled-components';
 import styles from 'style-utils';
 
-console.log(styles);
-
 const Bar = styled.div`
   line-height: 50px;
   position: relative;

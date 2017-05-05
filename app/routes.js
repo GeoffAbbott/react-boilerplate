@@ -22,13 +22,19 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          import('containers/Playlist/reducer'),
+          import('containers/Playlist/sagas'),
+          import('containers/Playlist/actions'),
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, actions, component]) => {
+          injectReducer('home', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
+          store.dispatch(actions.loadPlaylist());
         });
 
         importModules.catch(errorLoading);

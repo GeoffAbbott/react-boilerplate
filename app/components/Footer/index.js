@@ -18,6 +18,7 @@ const FooterWrap = styled.div`
   width:100%;
   background-size: 100% auto;
   background-repeat: repeat;
+  margin-top:50px;
 `;
 
 function Footer() {

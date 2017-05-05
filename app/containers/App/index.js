@@ -13,6 +13,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import Helmet from 'react-helmet';
 
 import NavBar from 'components/NavBar';
 import PromoBar from 'components/PromoBar';
@@ -41,6 +42,13 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   render() {
     return (
       <AppWrapper>
+        <Helmet
+          titleTemplate="%s - The World's Smartest Company"
+          defaultTitle="CollegeBand - The World's Smartest Company"
+          meta={[
+            { name: 'description', content: 'Big Dog on Campus' },
+          ]}
+        />
         <PromoBar />
         <MainCol>
           <NavBar />

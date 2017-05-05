@@ -10,12 +10,16 @@
  */
 
 import React from 'react';
-import Playlist from 'components/Playlist';
+import Playlist from 'containers/Playlist';
+import Lgtbbt from 'components/Lgtbbt';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <Playlist />
+      <div>
+        <Playlist></Playlist>
+        <Lgtbbt />
+      </div>
     );
   }
 }
