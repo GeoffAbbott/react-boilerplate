@@ -11,6 +11,12 @@ class Track extends CollegeBandModel {
 
       name: PropTypes.string,
 
+      coverUrl: PropTypes.string,
+
+      albumName: PropTypes.string,
+
+      artistName: PropTypes.string,
+
     };
 
   }

@@ -12,13 +12,15 @@
 import React from 'react';
 import Playlist from 'containers/Playlist';
 import Lgtbbt from 'components/Lgtbbt';
+import PopularAlbums from 'containers/ProductCollection';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
-        <Playlist></Playlist>
+        <Playlist />
         <Lgtbbt />
+        <PopularAlbums />
       </div>
     );
   }

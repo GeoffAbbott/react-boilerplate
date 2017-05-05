@@ -1,43 +1,42 @@
 /*
  *
- * Playlist reducer
+ * Collection reducer
  *
  */
 
 import { fromJS } from 'immutable';
 
 import {
-  LOAD_PLAYLIST,
-  LOAD_PLAYLIST_SUCCESS,
+  LOAD_COLLECTION,
+  LOAD_COLLECTION_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
   loading: false,
   error: false,
-  playlist: [],
+  products: false,
 });
 
-function playlistReducer(state = initialState, action) {
+function shopifyReducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case LOAD_PLAYLIST:
+    case LOAD_COLLECTION:
 
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['data'], false);
+        .setIn(['products'], false);
 
-    case LOAD_PLAYLIST_SUCCESS:
+    case LOAD_COLLECTION_SUCCESS:
 
       return state
-        .setIn(['data'], action.playlist)
+        .setIn(['products'], action.products)
         .set('loading', false);
 
     default:
-
       return state;
   }
 }
 
-export default playlistReducer;
+export default shopifyReducer;

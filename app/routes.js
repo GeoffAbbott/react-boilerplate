@@ -13,7 +13,9 @@ const loadModule = (cb) => (componentModule) => {
 };
 
 export default function createRoutes(store) {
+
   // Create reusable async injectors using getAsyncInjectors factory
+
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
   return [
@@ -23,18 +25,28 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/Playlist/reducer'),
+          import('containers/ShopifyProvider/reducer'),
+
           import('containers/Playlist/sagas'),
-          import('containers/Playlist/actions'),
+          import('containers/ShopifyProvider/sagas'),
+
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, actions, component]) => {
-          injectReducer('home', reducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([playlistReducer, shopifyReducer, playlistSaga, shopifySaga, component]) => {
+
+          injectReducer('home', playlistReducer.default);
+
+          injectReducer('collection', shopifyReducer.default);
+
+          injectSagas(playlistSaga.default);
+
+          injectSagas(shopifySaga.default);
+
           renderRoute(component);
-          store.dispatch(actions.loadPlaylist());
+
         });
 
         importModules.catch(errorLoading);
