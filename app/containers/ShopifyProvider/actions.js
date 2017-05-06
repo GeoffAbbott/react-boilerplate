@@ -10,10 +10,11 @@ import {
   LOAD_COLLECTION_ERROR,
 } from './constants';
 
-export function loadCollection(id) {
+export function loadCollection(id, limit = 10) {
   return {
     type: LOAD_COLLECTION,
     id,
+    limit,
   };
 }
 

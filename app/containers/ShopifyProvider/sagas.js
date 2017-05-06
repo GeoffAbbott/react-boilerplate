@@ -18,6 +18,8 @@ export function* loadCollection(action) {
 
       collection_id: action.id,
 
+      limit: action.limit,
+
     });
 
     yield put(collectionLoaded(collection));

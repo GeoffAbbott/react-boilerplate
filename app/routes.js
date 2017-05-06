@@ -21,16 +21,23 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
+
       name: 'home',
+
       getComponent(nextState, cb) {
+
         const importModules = Promise.all([
+
           import('containers/Playlist/reducer'),
+
           import('containers/ShopifyProvider/reducer'),
 
           import('containers/Playlist/sagas'),
+
           import('containers/ShopifyProvider/sagas'),
 
           import('containers/HomePage'),
+
         ]);
 
         const renderRoute = loadModule(cb);
@@ -54,6 +61,14 @@ export default function createRoutes(store) {
     }, {
       path: '/about',
       name: 'aboutPage',
+      getComponent(location, cb) {
+        import('containers/AboutPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
+      path: '/product/:handle',
+      name: 'productPage',
       getComponent(location, cb) {
         import('containers/AboutPage')
           .then(loadModule(cb))

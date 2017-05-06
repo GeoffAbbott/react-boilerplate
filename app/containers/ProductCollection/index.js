@@ -7,10 +7,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
+import ProductComponent from 'components/Product';
+import Product from 'models/Product';
 import { makeSelectCollection, makeSelectLoading } from './selectors';
 import { loadCollection } from '../ShopifyProvider/actions';
-import Product from 'models/Product';
-// import { makeSelectPlaylist, makeSelectLoading } from './selectors';
 
 const ProductCollectionWrap = styled.div`
   min-height:600px;
@@ -32,6 +32,9 @@ export class ProductCollection extends React.PureComponent { // eslint-disable-l
 
       <ProductCollectionWrap>
 
+        {
+          this.props.products ? this.props.products.map((p) => (<ProductComponent key={`product-${p.id}`} product={new Product(p)} />)) : <h5>Loading</h5>
+        }
 
       </ProductCollectionWrap>
 
@@ -65,7 +68,7 @@ ProductCollection.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
 
-  dispatch(loadCollection('364016070'));
+  dispatch(loadCollection('364016070', 4));
 
   return {};
 }

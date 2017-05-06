@@ -6,7 +6,11 @@ class Product extends CollegeBandModel {
 
   props = {
 
-    name: React.PropTypes.bool,
+    name: React.PropTypes.string,
+
+    id: React.PropTypes.string,
+
+    handle: React.PropTypes.string,
 
   };
 
@@ -14,7 +18,13 @@ class Product extends CollegeBandModel {
 
     super();
 
-    this.props.name = params.name;
+    this.props.name = params.title;
+
+    this.props.id = params.id;
+
+    this.props.handle = params.attrs.handle;
+
+    this.props.images = params.images;
 
   }
 
