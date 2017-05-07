@@ -75,12 +75,67 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
-      path: '*',
-      name: 'notfound',
+
+      path: '/artists/:filter',
+
+      name: 'listArtistPage',
+
+      getComponent(location, cb) {
+
+        const importModules = Promise.all([
+
+          import('containers/ListArtistPage/reducer'),
+
+          import('containers/ListArtistPage/sagas'),
+
+          import('containers/ListArtistPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([listReducer, listSaga, component]) => {
+
+          injectReducer('listArtistPage', listReducer.default);
+
+          injectSagas(listSaga.default);
+
+          renderRoute(component);
+
+        });
+
+      },
+    }, {
+
+      path: ':artistName',
+
+      name: 'bandPage',
+
       getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+
+        const importModules = Promise.all([
+
+          import('containers/BandPage/reducer'),
+
+          import('containers/BandPage/sagas'),
+
+          import('containers/BandPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([bandReducer, bandSaga, component]) => {
+
+          injectReducer('bandPage', bandReducer.default);
+
+          injectSagas(bandSaga.default);
+
+          renderRoute(component);
+
+        });
+
+        importModules.catch(errorLoading);
       },
     },
   ];

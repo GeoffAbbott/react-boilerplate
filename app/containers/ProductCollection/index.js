@@ -71,6 +71,7 @@ export function mapDispatchToProps(dispatch) {
   dispatch(loadCollection('364016070', 4));
 
   return {};
+
 }
 
 const mapStateToProps = createStructuredSelector({

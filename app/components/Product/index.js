@@ -38,7 +38,7 @@ class Product extends React.PureComponent { // eslint-disable-line react/prefer-
 
           <Link to={`/product/${this.props.product.props.handle}`}>
 
-            <ProductImage src={this.props.product.props.images[0].src} />
+            <ProductImage src={this.props.product.getImageWithSize('large')} />
 
           </Link>
 

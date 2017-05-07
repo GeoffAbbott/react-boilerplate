@@ -6,27 +6,37 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router';
 
-import A from './A';
+const Li = styled.li`
+  float:left;
+  padding: 0 20px;
+`;
 
-function NavItem(props) { // eslint-disable-line react/prefer-stateless-function
-  const Title = props.title;
-  const Link = props.href;
-  const Li = styled.li`
-    float:left;
-    padding: 0 20px;
-  `;
+class NavItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  return (
-    <Li>
-      <A className="nav-item cb-grey" href={Link}>{Title}</A>
-    </Li>
-  );
+  render() {
+
+    return (
+
+      <Li>
+
+        <Link className="nav-item cb-grey" to={this.props.href}>{this.props.title}</Link>
+
+      </Li>
+
+    );
+
+  }
+
 }
 
 NavItem.propTypes = {
+
   title: React.PropTypes.string.isRequired,
+
   href: React.PropTypes.string.isRequired,
+
 };
 
 export default NavItem;

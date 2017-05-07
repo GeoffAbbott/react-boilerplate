@@ -28,6 +28,14 @@ class Product extends CollegeBandModel {
 
   }
 
+  getImageWithSize(size) {
+
+    const index = this.props.images[0].src.indexOf('.jpg');
+
+    return [this.props.images[0].src.slice(0, index), `_${size}`, this.props.images[0].src.slice(index)].join('');
+
+  }
+
 }
 
 export default Product;
