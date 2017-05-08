@@ -5,8 +5,10 @@
 */
 
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import TrackModel from '../../models/Track';
+import { Link } from 'react-router';
+import { playTrack } from 'containers/App/actions';
 
 const TrackContainer = styled.div`
   display: inline-block;
@@ -32,40 +34,64 @@ const statBox = styled.div`
   float:left;
 `;
 
-function Track(props) {
+class Track extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  const track = new TrackModel(props.data);
+  render() {
 
-  return (
+    return (
 
-    <TrackContainer>
+      <TrackContainer>
 
-      <AvatarContainer>
+        <AvatarContainer>
 
-        <CoverArt src={track.props.coverUrl} />
+          <CoverArt onClick={() => this.props.handleTrackClicked(this.props.track)} src={this.props.track.props.coverUrl} />
 
-      </AvatarContainer>
+        </AvatarContainer>
 
-      <statBox>
+        <statBox>
 
-        <ul>
+          <ul>
 
-          <li>{track.props.name}</li>
+            <li>{this.props.track.props.name}</li>
 
-          <li>{track.props.artistName}</li>
+            <li>
 
-        </ul>
+              <Link to={this.props.track.props.handle}>
 
-      </statBox>
+                {this.props.track.props.artistName}
 
-    </TrackContainer>
+              </Link>
 
-  );
+            </li>
+
+          </ul>
+
+        </statBox>
+
+      </TrackContainer>
+
+    );
+
+  }
 
 }
 
 Track.propTypes = {
-  data: PropTypes.object,
+
+  track: PropTypes.object,
+
+  handleTrackClicked: PropTypes.func,
+
 };
 
-export default Track;
+export function mapDispatchToProps(dispatch) {
+
+  return {
+
+    handleTrackClicked: (track) => dispatch(playTrack(track)),
+
+  };
+
+}
+
+export default connect(null, mapDispatchToProps)(Track);

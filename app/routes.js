@@ -5,11 +5,15 @@
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 
 const errorLoading = (err) => {
+
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+
 };
 
 const loadModule = (cb) => (componentModule) => {
+
   cb(null, componentModule.default);
+
 };
 
 export default function createRoutes(store) {
@@ -44,7 +48,7 @@ export default function createRoutes(store) {
 
         importModules.then(([playlistReducer, shopifyReducer, playlistSaga, shopifySaga, component]) => {
 
-          injectReducer('home', playlistReducer.default);
+          injectReducer('playlist', playlistReducer.default);
 
           injectReducer('collection', shopifyReducer.default);
 
@@ -68,11 +72,33 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/product/:handle',
-      name: 'productPage',
+      name: 'productDetailsPage',
       getComponent(location, cb) {
-        import('containers/AboutPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+
+        const importModules = Promise.all([
+
+          import('containers/ShopifyProvider/reducer'),
+
+          import('containers/ShopifyProvider/sagas'),
+
+          import('containers/ProductDetailsPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([produtPageReducer, produtPageSaga, component]) => {
+
+          injectReducer('product', produtPageReducer.default);
+
+          injectSagas(produtPageSaga.default);
+
+          renderRoute(component);
+
+        });
+
+        importModules.catch(errorLoading);
+
       },
     }, {
 

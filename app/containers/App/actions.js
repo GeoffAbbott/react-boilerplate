@@ -16,4 +16,30 @@
  */
 
 import {
+  PLAY_TRACK,
+  PAUSE_TRACK,
 } from './constants';
+
+export function playTrack(track) {
+
+  console.log(`PLAY TRACK: ${track.props.name}`);
+
+  return {
+
+    type: PLAY_TRACK,
+
+    track,
+
+  };
+
+}
+
+export function pauseTrack() {
+
+  return {
+
+    type: PAUSE_TRACK,
+
+  };
+
+}

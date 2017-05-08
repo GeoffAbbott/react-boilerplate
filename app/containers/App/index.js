@@ -18,6 +18,7 @@ import Helmet from 'react-helmet';
 import NavBar from 'components/NavBar';
 import PromoBar from 'components/PromoBar';
 import Footer from 'components/Footer';
+import AudioPlayer from 'components/Player';
 
 const AppWrapper = styled.div`
 
@@ -40,8 +41,11 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   };
 
   render() {
+
     return (
+
       <AppWrapper>
+
         <Helmet
           titleTemplate="%s - The World's Smartest Company"
           defaultTitle="CollegeBand - The World's Smartest Company"
@@ -49,13 +53,23 @@ export default class App extends React.PureComponent { // eslint-disable-line re
             { name: 'description', content: 'Big Dog on Campus' },
           ]}
         />
+
         <PromoBar />
+
         <MainCol>
+
           <NavBar />
+
           {React.Children.toArray(this.props.children)}
+
         </MainCol>
+
         <Footer />
+
+        <AudioPlayer />
+
       </AppWrapper>
+
     );
   }
 }

@@ -9,6 +9,7 @@ import Track from 'components/Track';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { makeSelectPlaylist, makeSelectLoading } from './selectors';
+import TrackModel from '../../models/Track';
 
 const PlaylistWrap = styled.div`
   margin-top:15px;
@@ -40,7 +41,7 @@ export class Playlist extends React.PureComponent { // eslint-disable-line react
 
       const tracks = this.props.playlist.tracks.map((track, index) => {
 
-        return <Track key={`repo-list-item-${index}`} data={track} />;
+        return <Track key={`repo-list-item-${index}`} track={new TrackModel(track)} />;
 
       });
 

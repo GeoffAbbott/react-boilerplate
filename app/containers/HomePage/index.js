@@ -15,13 +15,23 @@ import Lgtbbt from 'components/Lgtbbt';
 import PopularAlbums from 'containers/ProductCollection';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   render() {
+
     return (
+
       <div>
+
         <Playlist />
+
         <Lgtbbt />
+
         <PopularAlbums />
+
       </div>
+
     );
+
   }
+
 }

@@ -12,6 +12,8 @@ class Product extends CollegeBandModel {
 
     handle: React.PropTypes.string,
 
+    description: React.PropTypes.string,
+
   };
 
   constructor(params) {
@@ -23,6 +25,8 @@ class Product extends CollegeBandModel {
     this.props.id = params.id;
 
     this.props.handle = params.attrs.handle;
+
+    this.props.description = params.description;
 
     this.props.images = params.images;
 

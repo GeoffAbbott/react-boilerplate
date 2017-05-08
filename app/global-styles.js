@@ -37,4 +37,11 @@ injectGlobal`
     margin: 0;
     list-style: none;
   }
+  .animate{
+    -webkit-transition: all 500ms;
+    transition: all 500ms;
+  }
+  .show{
+    bottom:0;
+  }
 `;

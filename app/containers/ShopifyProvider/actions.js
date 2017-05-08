@@ -8,14 +8,33 @@ import {
   LOAD_COLLECTION,
   LOAD_COLLECTION_SUCCESS,
   LOAD_COLLECTION_ERROR,
+  LOAD_PRODUCT,
+  LOAD_PRODUCT_SUCCESS,
+  LOAD_PRODUCT_ERROR,
 } from './constants';
 
-export function loadCollection(id, limit = 10) {
+export function loadCollection(params) {
+
   return {
+
     type: LOAD_COLLECTION,
-    id,
-    limit,
+
+    params,
+
   };
+
+}
+
+export function loadProduct(params) {
+
+  return {
+
+    type: LOAD_PRODUCT,
+
+    params,
+
+  };
+
 }
 
 export function collectionLoaded(collection) {
@@ -26,9 +45,24 @@ export function collectionLoaded(collection) {
   };
 }
 
+export function productLoaded(product) {
+
+  return {
+    type: LOAD_PRODUCT_SUCCESS,
+    product,
+  };
+}
+
 export function collectionLoadingError(error) {
   return {
     type: LOAD_COLLECTION_ERROR,
+    error,
+  };
+}
+
+export function productLoadingError(error) {
+  return {
+    type: LOAD_PRODUCT_ERROR,
     error,
   };
 }

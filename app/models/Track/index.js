@@ -5,35 +5,37 @@ import CollegeBandModel from '../CollegeBand';
 
 class Track extends CollegeBandModel {
 
-  get schema() {
+  props = {
 
-    return {
+    name: PropTypes.string,
 
-      name: PropTypes.string,
+    url: PropTypes.string,
 
-      coverUrl: PropTypes.string,
+    coverUrl: PropTypes.string,
 
-      albumName: PropTypes.string,
+    albumName: PropTypes.string,
 
-      artistName: PropTypes.string,
+    artistName: PropTypes.string,
 
-    };
+    handle: PropTypes.string,
 
-  }
+  };
 
   constructor(params) {
 
-    const newParams = {};
+    super();
 
-    newParams.name = params.name || 'No Name';
+    this.props.name = params.name || 'No Name';
 
-    newParams.coverUrl = params.Album.coverUrl || 'No Name';
+    this.props.url = params.url || 'No Name';
 
-    newParams.albumName = params.Album.name || 'No Name';
+    this.props.coverUrl = params.Album.coverUrl || 'No Name';
 
-    newParams.artistName = params.Band.name || 'No Name';
+    this.props.albumName = params.Album.name || 'No Name';
 
-    super(newParams);
+    this.props.artistName = params.Band.name || 'No Name';
+
+    this.props.handle = params.Band.shopify.url || 'No Name';
 
   }
 

@@ -8,7 +8,9 @@ import { fromJS } from 'immutable';
 
 import {
   LOAD_COLLECTION,
+  LOAD_PRODUCT,
   LOAD_COLLECTION_SUCCESS,
+  LOAD_PRODUCT_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
@@ -32,6 +34,19 @@ function shopifyReducer(state = initialState, action) {
 
       return state
         .setIn(['products'], action.products)
+        .set('loading', false);
+
+    case LOAD_PRODUCT:
+
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .setIn(['product'], false);
+
+    case LOAD_PRODUCT_SUCCESS:
+
+      return state
+        .setIn(['product'], action.product[0] || null)
         .set('loading', false);
 
     default:

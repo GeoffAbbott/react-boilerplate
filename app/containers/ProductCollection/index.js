@@ -68,7 +68,13 @@ ProductCollection.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
 
-  dispatch(loadCollection('364016070', 4));
+  dispatch(loadCollection({
+
+    collection_id: '364016070',
+
+    limit: 4,
+
+  }));
 
   return {};
 
