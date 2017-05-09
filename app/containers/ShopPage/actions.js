@@ -1,6 +1,6 @@
 /*
  *
- * Playlist actions
+ * ShopPage actions
  *
  */
 

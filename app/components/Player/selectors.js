@@ -7,13 +7,7 @@ const makeSelectTrack = () => createSelector(
 
   selectTrack,
 
-  (trackState) => {
-
-    console.log(trackState);
-
-    return trackState.get('track');
-
-  }
+  (trackState) => trackState.get('track')
 
 );
 

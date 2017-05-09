@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectProduct = (state) => state.get('product');
+const selectProduct = (state) => state.get('Product.Details');
 
 const makeSelectProduct = () => createSelector(
 

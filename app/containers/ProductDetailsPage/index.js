@@ -7,10 +7,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { createStructuredSelector } from 'reselect';
-import { makeSelectProduct, makeSelectLoading } from './selectors';
-import { loadProduct } from '../ShopifyProvider/actions';
 import Product from 'models/Product';
+import { createStructuredSelector } from 'reselect';
+import { addVariantToCart } from 'containers/App/actions';
+import { loadProduct } from './actions';
+import { makeSelectProduct, makeSelectLoading } from './selectors';
 
 export class ProductDetailsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -37,6 +38,8 @@ export class ProductDetailsPage extends React.PureComponent { // eslint-disable-
         <h1>{product.props.name}</h1>
 
         <h3>{product.props.description}</h3>
+
+        {this.props.product.attrs.variants.map((variant, index) => (<button onClick={() => this.props.addToCart(variant)} key={index} className="btn btn-success">{variant.title}</button>))}
 
       </div>
 
@@ -66,6 +69,8 @@ ProductDetailsPage.propTypes = {
 
   ]),
 
+  addToCart: React.PropTypes.func,
+
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -85,8 +90,11 @@ function mapDispatchToProps(dispatch, ownProps) {
   }));
 
   return {
-    dispatch,
+
+    addToCart: (variant) => dispatch(addVariantToCart(variant)),
+
   };
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailsPage);

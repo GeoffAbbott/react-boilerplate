@@ -12,7 +12,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  loading: false,
+  loading: true,
   error: false,
   band: false,
 });
@@ -26,12 +26,12 @@ function bandReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['data'], false);
+        .set('band', false);
 
     case LOAD_BAND_SUCCESS:
 
       return state
-        .setIn(['band'], action.band.data[0])
+        .set('band', action.band.data[0])
         .set('loading', false);
 
     default:

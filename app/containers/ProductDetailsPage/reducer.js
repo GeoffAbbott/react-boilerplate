@@ -7,31 +7,31 @@
 import { fromJS } from 'immutable';
 
 import {
-  LOAD_COLLECTION,
-  LOAD_COLLECTION_SUCCESS,
+  LOAD_PRODUCT,
+  LOAD_PRODUCT_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
   loading: false,
   error: false,
-  products: false,
+  product: false,
 });
 
-function shopifyReducer(state = initialState, action) {
+function productDetailsReducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case LOAD_COLLECTION:
+    case LOAD_PRODUCT:
 
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['products'], false);
+        .set('product', false);
 
-    case LOAD_COLLECTION_SUCCESS:
+    case LOAD_PRODUCT_SUCCESS:
 
       return state
-        .setIn(['products'], action.products)
+        .set('product', action.product[0] || null)
         .set('loading', false);
 
     default:
@@ -39,4 +39,4 @@ function shopifyReducer(state = initialState, action) {
   }
 }
 
-export default shopifyReducer;
+export default productDetailsReducer;

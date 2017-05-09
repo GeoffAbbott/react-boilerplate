@@ -5,9 +5,9 @@ import { bandLoaded, bandLoadingError } from 'containers/BandPage/actions';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
 
-export function* loadBand(params) {
-  
-  const requestURL = `http://cbmf.rocks/api/band/?articles=true&recommended=true&key=${params.key}&value=${params.value}`;
+export function* loadBand(action) {
+
+  const requestURL = `http://cbmf.rocks/api/band/?articles=true&recommended=true&key=${action.params.key}&value=${action.params.value}`;
 
   try {
 
@@ -20,6 +20,7 @@ export function* loadBand(params) {
     yield put(bandLoadingError(err));
 
   }
+
 }
 
 export function* bandData() {
@@ -29,6 +30,7 @@ export function* bandData() {
   yield take(LOCATION_CHANGE);
 
   yield cancel(watcher);
+
 }
 
 export default [

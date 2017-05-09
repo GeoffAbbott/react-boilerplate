@@ -1,6 +1,6 @@
 /*
  *
- * Collection reducer
+ * ShopPage reducer
  *
  */
 
@@ -17,7 +17,7 @@ const initialState = fromJS({
   products: false,
 });
 
-function shopifyReducer(state = initialState, action) {
+function shopPageReducer(state = initialState, action) {
 
   switch (action.type) {
 
@@ -39,4 +39,4 @@ function shopifyReducer(state = initialState, action) {
   }
 }
 
-export default shopifyReducer;
+export default shopPageReducer;

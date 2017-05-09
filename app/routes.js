@@ -20,6 +20,18 @@ export default function createRoutes(store) {
 
   // Create reusable async injectors using getAsyncInjectors factory
 
+  const globalImportModules = Promise.all([
+
+    import('containers/App/sagas'),
+
+  ]);
+
+  globalImportModules.then(([cartSaga]) => {
+
+    injectSagas([cartSaga.createCart]);
+
+  });
+
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
   return [
@@ -34,8 +46,6 @@ export default function createRoutes(store) {
 
           import('containers/Playlist/reducer'),
 
-          import('containers/ShopifyProvider/reducer'),
-
           import('containers/Playlist/sagas'),
 
           import('containers/ShopifyProvider/sagas'),
@@ -46,11 +56,9 @@ export default function createRoutes(store) {
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([playlistReducer, shopifyReducer, playlistSaga, shopifySaga, component]) => {
+        importModules.then(([playlistReducer, playlistSaga, shopifySaga, component]) => {
 
           injectReducer('playlist', playlistReducer.default);
-
-          injectReducer('collection', shopifyReducer.default);
 
           injectSagas(playlistSaga.default);
 
@@ -71,15 +79,47 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
+      path: '/shop',
+      name: 'shopPage',
+      getComponent(location, cb) {
+
+        const importModules = Promise.all([
+
+          import('containers/ShopPage/reducer'),
+
+          import('containers/ShopPage/sagas'),
+
+          import('containers/ShopPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([ShopPageReducer, ShopPageSaga, component]) => {
+
+          injectReducer('Shop.Collection', ShopPageReducer.default);
+
+          injectSagas(ShopPageSaga.default);
+
+          renderRoute(component);
+
+        });
+
+        importModules.catch(errorLoading);
+
+      },
+    }, {
       path: '/product/:handle',
       name: 'productDetailsPage',
       getComponent(location, cb) {
 
         const importModules = Promise.all([
 
-          import('containers/ShopifyProvider/reducer'),
+          import('containers/ProductDetailsPage/reducer'),
 
-          import('containers/ShopifyProvider/sagas'),
+          import('containers/ProductDetailsPage/sagas'),
+
+          import('containers/App/sagas'),
 
           import('containers/ProductDetailsPage'),
 
@@ -87,11 +127,13 @@ export default function createRoutes(store) {
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([produtPageReducer, produtPageSaga, component]) => {
+        importModules.then(([produtPageReducer, produtPageSaga, globalSagas, component]) => {
 
-          injectReducer('product', produtPageReducer.default);
+          injectReducer('Product.Details', produtPageReducer.default);
 
           injectSagas(produtPageSaga.default);
+
+          injectSagas(globalSagas.default);
 
           renderRoute(component);
 
@@ -125,6 +167,37 @@ export default function createRoutes(store) {
           injectReducer('listArtistPage', listReducer.default);
 
           injectSagas(listSaga.default);
+
+          renderRoute(component);
+
+        });
+
+      },
+    }, {
+
+      path: '/charts/:type',
+
+      name: 'ChartsPage',
+
+      getComponent(location, cb) {
+
+        const importModules = Promise.all([
+
+          import('containers/ChartsPage/reducer'),
+
+          import('containers/ChartsPage/sagas'),
+
+          import('containers/ChartsPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([chartReducer, chartSaga, component]) => {
+
+          injectReducer('ChartsPage', chartReducer.default);
+
+          injectSagas(chartSaga.default);
 
           renderRoute(component);
 

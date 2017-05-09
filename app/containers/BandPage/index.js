@@ -8,12 +8,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+import FourOhFour from 'containers/NotFoundPage';
 import { makeSelectBand, makeSelectLoading } from './selectors';
 import { loadBand } from './actions';
 
 export class BandPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
+
+    if (this.props.loading) return (<div>Loading</div>);
+
+    if (!this.props.loading && !this.props.band) return (<FourOhFour />);
 
     return (
 

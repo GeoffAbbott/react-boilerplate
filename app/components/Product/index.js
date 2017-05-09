@@ -13,7 +13,8 @@ const ProductWrap = styled.div`
   overflow:hidden;
   position:relative;
   float:left;
-  width:25%;
+  width:280px;
+  height:280px;
 `;
 
 const ImageWrap = styled.div`

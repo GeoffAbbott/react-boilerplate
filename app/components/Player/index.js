@@ -22,15 +22,9 @@ const PlayerWrap = styled.div`
   border-top:#666 thin solid;
 `;
 
-const AudioObject = styled.audio`
-  display:none;
-`;
-
 class Player extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-
-    console.log('redndering player');
 
     return (
 

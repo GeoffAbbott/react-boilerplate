@@ -8,6 +8,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import styled from 'styled-components';
 import NavItem from 'components/NavItem';
+import Cart from 'containers/Cart';
 import Logo from './logo.png';
 import Img from './Img';
 
@@ -37,11 +38,12 @@ function NavBar() {
         </Link>
       </LogoWrap>
       <Nav>
-        <NavItem title="Charts" href="/charts" />
+        <NavItem title="Charts" href="/charts/artists" />
         <NavItem title="Artists" href="/artists/name" />
         <NavItem title="Shop" href="/shop" />
         <NavItem title="News" href="/news" />
         <NavItem title="Add Band" href="/add-band" />
+        <Cart />
       </Nav>
     </HeaderWrap>
   );

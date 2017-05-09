@@ -1,9 +1,9 @@
 
 import { put, cancel, takeLatest, take } from 'redux-saga/effects';
-import { LOAD_COLLECTION } from 'containers/ShopifyProvider/constants';
-import { collectionLoaded, collectionLoadingError } from 'containers/ShopifyProvider/actions';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import ShopifyClient from 'models/Shopify';
+import { LOAD_COLLECTION } from './constants';
+import { collectionLoaded, collectionLoadingError } from './actions';
 
 export function* loadCollection(action) {
 

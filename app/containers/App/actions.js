@@ -18,11 +18,11 @@
 import {
   PLAY_TRACK,
   PAUSE_TRACK,
+  ADD_VARIANT_TO_CART,
+  SET_CART,
 } from './constants';
 
 export function playTrack(track) {
-
-  console.log(`PLAY TRACK: ${track.props.name}`);
 
   return {
 
@@ -34,11 +34,35 @@ export function playTrack(track) {
 
 }
 
+export function setCart(cart) {
+
+  return {
+
+    type: SET_CART,
+
+    cart,
+
+  };
+
+}
+
 export function pauseTrack() {
 
   return {
 
     type: PAUSE_TRACK,
+
+  };
+
+}
+
+export function addVariantToCart(variant) {
+
+  return {
+
+    type: ADD_VARIANT_TO_CART,
+
+    variant,
 
   };
 
