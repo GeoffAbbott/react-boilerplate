@@ -38,7 +38,7 @@ function NavBar() {
         </Link>
       </LogoWrap>
       <Nav>
-        <NavItem title="Charts" href="/charts/artists" />
+        <NavItem title="Charts" href="/charts/band" />
         <NavItem title="Artists" href="/artists/name" />
         <NavItem title="Shop" href="/shop" />
         <NavItem title="News" href="/news" />
