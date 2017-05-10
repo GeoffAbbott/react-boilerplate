@@ -1,13 +1,13 @@
 
 import { createSelector } from 'reselect';
 
-const selectPlaylist = (state) => state.get('playlist');
+const selectPlaylist = (state) => state.get('hp.playlist');
 
 const makeSelectPlaylist = () => createSelector(
 
   selectPlaylist,
 
-  (playlistState) => playlistState.get('data')
+  (playlistState) => playlistState.get('playlist')
 
 );
 

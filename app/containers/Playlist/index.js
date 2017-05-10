@@ -5,10 +5,11 @@
  */
 import React, { PropTypes } from 'react';
 import { createStructuredSelector } from 'reselect';
-import Track from 'components/Track';
+import TrackComponent from 'components/Track';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { makeSelectPlaylist, makeSelectLoading } from './selectors';
+import { loadPlaylist } from './actions';
 import TrackModel from '../../models/Track';
 
 const PlaylistWrap = styled.div`
@@ -37,11 +38,31 @@ export class Playlist extends React.PureComponent { // eslint-disable-line react
       playlist,
     };
 
-    if (this.props.playlist) {
+    if (this.props.loading) return (<h5>Loading...</h5>);
+
+    if (!this.props.loading && this.props.playlist) {
 
       const tracks = this.props.playlist.tracks.map((track, index) => {
 
-        return <Track key={`repo-list-item-${index}`} track={new TrackModel(track)} />;
+        const p = new TrackModel({
+
+          trackId: track._id,
+
+          trackName: track.name,
+
+          trackUrl: track.url,
+
+          albumCoverUrl: track.Album.coverUrl,
+
+          albumName: track.Album.name,
+
+          artistName: track.Band.name,
+
+          artistUrl: track.Band.shopify.url,
+
+        });
+
+        return <TrackComponent key={`repo-list-item-${index}`} track={p} />;
 
       });
 
@@ -109,6 +130,14 @@ Playlist.propTypes = {
 
 };
 
+export function mapDispatchToProps(dispatch) {
+
+  dispatch(loadPlaylist());
+
+  return {};
+
+}
+
 const mapStateToProps = createStructuredSelector({
 
   playlist: makeSelectPlaylist(),
@@ -117,4 +146,4 @@ const mapStateToProps = createStructuredSelector({
 
 });
 
-export default connect(mapStateToProps)(Playlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

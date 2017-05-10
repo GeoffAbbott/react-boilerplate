@@ -52,21 +52,25 @@ export default function createRoutes(store) {
 
           import('containers/PopularAlbums/sagas'),
 
+          import('containers/App/sagas'),
+
           import('containers/HomePage'),
 
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([playlistReducer, playlistSaga, popularAlbumsReducer, popularAlbumsSaga, component]) => {
+        importModules.then(([playlistReducer, playlistSaga, popularAlbumsReducer, popularAlbumsSaga, globalSagas, component]) => {
 
-          injectReducer('playlist', playlistReducer.default);
+          injectReducer('hp.playlist', playlistReducer.default);
 
           injectSagas(playlistSaga.default);
 
           injectReducer('popular.albums', popularAlbumsReducer.default);
 
           injectSagas(popularAlbumsSaga.default);
+
+          injectSagas([globalSagas.playTrackWatcher]);
 
           renderRoute(component);
 
@@ -84,8 +88,37 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
+
+      path: '/cart',
+
+      name: 'cartPage',
+
+      getComponent(location, cb) {
+
+        const importModules = Promise.all([
+
+          import('containers/CartPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+
+          renderRoute(component);
+
+        });
+
+        importModules.catch(errorLoading);
+
+      },
+
+    }, {
+
       path: '/shop',
+
       name: 'shopPage',
+
       getComponent(location, cb) {
 
         const importModules = Promise.all([
@@ -138,7 +171,7 @@ export default function createRoutes(store) {
 
           injectSagas(produtPageSaga.default);
 
-          injectSagas(globalSagas.default);
+          injectSagas([globalSagas.addVariantToCartWatcher]);
 
           renderRoute(component);
 
@@ -192,17 +225,21 @@ export default function createRoutes(store) {
 
           import('containers/ChartsPage/sagas'),
 
+          import('containers/App/sagas'),
+
           import('containers/ChartsPage'),
 
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([chartReducer, chartSaga, component]) => {
+        importModules.then(([chartReducer, chartSaga, globalSagas, component]) => {
 
           injectReducer('ChartsPage', chartReducer.default);
 
           injectSagas(chartSaga.default);
+
+          injectSagas([globalSagas.playTrackWatcher]);
 
           renderRoute(component);
 
@@ -272,6 +309,7 @@ export default function createRoutes(store) {
         });
 
         importModules.catch(errorLoading);
+
       },
     },
   ];

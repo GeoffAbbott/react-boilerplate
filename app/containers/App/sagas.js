@@ -1,10 +1,11 @@
 
-import { select, put, cancel, takeLatest, take } from 'redux-saga/effects';
+import { select, put, cancel, takeLatest, take, call } from 'redux-saga/effects';
 import ShopifyClient from 'models/Shopify';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { selectCart } from 'containers/Cart/selectors';
-import { ADD_VARIANT_TO_CART } from './constants';
-import { setCart } from './actions';
+import request from 'utils/request';
+import { ADD_VARIANT_TO_CART, PREPARE_TRACK_TO_PLAY } from './constants';
+import { setCart, trackReadyToPlay } from './actions';
 
 export function* createCart() {
 
@@ -32,9 +33,29 @@ export function* addVariantToCart(action) {
 
     const updatedCart = yield cart.createLineItemsFromVariants({ variant: action.variant, quantity: 1 });
 
+    alert('Item added to cart');
+
     yield put(setCart(null));
 
     yield put(setCart(updatedCart));
+
+  } catch (err) {
+
+    // yield put(bandLoadingError(err));
+
+  }
+
+}
+
+export function* getTrack(action) {
+
+  const requestURL = `http://cbmf.rocks/api/track/${action.trackId}`;
+
+  try {
+
+    const track = yield call(request, requestURL);
+
+    yield put(trackReadyToPlay(track));
 
   } catch (err) {
 
@@ -53,7 +74,17 @@ export function* addVariantToCartWatcher() {
   yield cancel(watcher);
 
 }
+export function* playTrackWatcher() {
+
+  const watcher = yield takeLatest(PREPARE_TRACK_TO_PLAY, getTrack);
+
+  yield take(LOCATION_CHANGE);
+
+  yield cancel(watcher);
+
+}
 
 export default [
   addVariantToCartWatcher,
+  playTrackWatcher,
 ];

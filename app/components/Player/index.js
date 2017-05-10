@@ -8,6 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
+import { Link } from 'react-router';
 import { makeSelectTrack } from './selectors';
 
 
@@ -26,13 +27,25 @@ class Player extends React.PureComponent { // eslint-disable-line react/prefer-s
 
   render() {
 
+    if (!this.props.track) return (<div>No Bueno</div>);
+
     return (
 
       <PlayerWrap className={'animate ' + (this.props.track ? 'show' : '')}>
 
-        <h1>{this.props.track ? this.props.track.props.name : 'No track loaded'}</h1>
+        <h1>{this.props.track ? this.props.track.track.name : 'No track loaded'}</h1>
 
-        {this.props.track ? <audio autoPlay="true"><source src={this.props.track.props.url} /></audio> : ''}
+        <h5>
+
+          <Link to={'/' + this.props.track.band.shopify.url}>
+
+            {this.props.track.band.name}
+
+          </Link>
+
+        </h5>
+
+        {this.props.track ? <audio autoPlay="true"><source src={this.props.track.track.url} /></audio> : ''}
 
       </PlayerWrap>
 

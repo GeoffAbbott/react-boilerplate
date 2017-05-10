@@ -12,9 +12,9 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  loading: false,
+  loading: true,
   error: false,
-  playlist: [],
+  playlist: false,
 });
 
 function playlistReducer(state = initialState, action) {
@@ -26,12 +26,12 @@ function playlistReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['data'], false);
+        .set('playlist', false);
 
     case LOAD_PLAYLIST_SUCCESS:
 
       return state
-        .setIn(['data'], action.playlist)
+        .set('playlist', action.playlist)
         .set('loading', false);
 
     default:

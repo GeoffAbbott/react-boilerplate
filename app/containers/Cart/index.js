@@ -7,6 +7,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 import { makeSelectCart } from './selectors';
 
@@ -26,11 +27,15 @@ export class Cart extends React.PureComponent { // eslint-disable-line react/pre
 
     return (
 
-      <CartContainer>
+      <Link to="/cart">
 
-        {this.props.cart ? this.props.cart.attrs.line_items.length : 0}
+        <CartContainer>
 
-      </CartContainer>
+          {this.props.cart ? this.props.cart.attrs.line_items.length : 0}
+
+        </CartContainer>
+
+      </Link>
 
     );
 

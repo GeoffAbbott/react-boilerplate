@@ -16,17 +16,30 @@
  */
 
 import {
-  PLAY_TRACK,
+  PREPARE_TRACK_TO_PLAY,
+  TRACK_READY_TO_PLAY,
   PAUSE_TRACK,
   ADD_VARIANT_TO_CART,
   SET_CART,
 } from './constants';
 
-export function playTrack(track) {
+export function prepareTrackToPlay(trackId) {
 
   return {
 
-    type: PLAY_TRACK,
+    type: PREPARE_TRACK_TO_PLAY,
+
+    trackId,
+
+  };
+
+}
+
+export function trackReadyToPlay(track) {
+
+  return {
+
+    type: TRACK_READY_TO_PLAY,
 
     track,
 

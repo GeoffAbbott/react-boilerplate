@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { playTrack } from 'containers/App/actions';
+import { prepareTrackToPlay } from 'containers/App/actions';
 
 const TrackContainer = styled.div`
   display: inline-block;
@@ -38,13 +38,15 @@ class Track extends React.PureComponent { // eslint-disable-line react/prefer-st
 
   render() {
 
+    console.log(this.props);
+
     return (
 
       <TrackContainer>
 
         <AvatarContainer>
 
-          <CoverArt onClick={() => this.props.handleTrackClicked(this.props.track)} src={this.props.track.props.coverUrl} />
+          <CoverArt onClick={() => this.props.handleTrackClicked(this.props.track.props.trackId)} src={this.props.track.props.albumCoverUrl} />
 
         </AvatarContainer>
 
@@ -52,11 +54,11 @@ class Track extends React.PureComponent { // eslint-disable-line react/prefer-st
 
           <ul>
 
-            <li>{this.props.track.props.name}</li>
+            <li>{this.props.track.props.trackName}</li>
 
             <li>
 
-              <Link to={this.props.track.props.handle}>
+              <Link to={this.props.track.props.artistUrl}>
 
                 {this.props.track.props.artistName}
 
@@ -78,7 +80,7 @@ class Track extends React.PureComponent { // eslint-disable-line react/prefer-st
 
 Track.propTypes = {
 
-  track: PropTypes.object,
+  track: PropTypes.object.required,
 
   handleTrackClicked: PropTypes.func,
 
@@ -88,7 +90,7 @@ export function mapDispatchToProps(dispatch) {
 
   return {
 
-    handleTrackClicked: (track) => dispatch(playTrack(track)),
+    handleTrackClicked: (track) => dispatch(prepareTrackToPlay(track)),
 
   };
 

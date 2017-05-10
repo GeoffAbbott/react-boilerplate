@@ -1,9 +1,9 @@
 
 import { call, put, cancel, take, takeLatest } from 'redux-saga/effects';
 import { LOAD_PLAYLIST } from 'containers/Playlist/constants';
-import { playlistLoaded, playlistLoadingError } from 'containers/Playlist/actions';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
+import { playlistLoaded, playlistLoadingError } from './actions';
 
 export function* loadPlaylist() {
 
@@ -22,7 +22,7 @@ export function* loadPlaylist() {
   }
 }
 
-export function* playlistData() {
+export function* loadPlaylistWatcher() {
 
   const watcher = yield takeLatest(LOAD_PLAYLIST, loadPlaylist);
 
@@ -32,6 +32,5 @@ export function* playlistData() {
 }
 
 export default [
-  playlistData,
-  loadPlaylist,
+  loadPlaylistWatcher,
 ];

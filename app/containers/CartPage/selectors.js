@@ -1,25 +1,19 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the cartPage state domain
- */
-const selectCartPageDomain = () => (state) => state.get('cartPage');
+const selectCart = (state) => state.get('global');
 
-/**
- * Other specific selectors
- */
+const makeSelectCart = () => createSelector(
 
+  selectCart,
 
-/**
- * Default selector used by CartPage
- */
+  (cartState) => cartState.get('cart')
 
-const makeSelectCartPage = () => createSelector(
-  selectCartPageDomain(),
-  (substate) => substate.toJS()
 );
 
-export default makeSelectCartPage;
 export {
-  selectCartPageDomain,
+
+  selectCart,
+
+  makeSelectCart,
+
 };

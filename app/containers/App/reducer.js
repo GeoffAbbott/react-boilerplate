@@ -13,7 +13,7 @@
 import { fromJS } from 'immutable';
 
 import {
-  PLAY_TRACK,
+  TRACK_READY_TO_PLAY,
   SET_CART,
 } from './constants';
 
@@ -28,7 +28,7 @@ function appReducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case PLAY_TRACK:
+    case TRACK_READY_TO_PLAY:
 
       return state
         .set('track', action.track);

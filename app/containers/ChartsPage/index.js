@@ -16,20 +16,25 @@ export class Chart extends React.PureComponent { // eslint-disable-line react/pr
 
   render() {
 
-    console.log(this.props.chart.chart);
-
     return (
+
       <div>
+
         <Helmet
           title="Chart"
           meta={[
             { name: 'description', content: 'Description of Chart' },
           ]}
         />
+
         <h5>{this.props.chart.chart ? this.props.chart.chart.map((item, index) => <ChartItem key={index} item={item}></ChartItem>) : 'Loading' }</h5>
+
       </div>
+
     );
+
   }
+
 }
 
 Chart.propTypes = {

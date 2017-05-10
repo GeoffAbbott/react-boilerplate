@@ -11,7 +11,8 @@
 
 export const DEFAULT_LOCALE = 'en';
 export const TAG_LINE = 'Let\'s get the band back together';
-export const PLAY_TRACK = 'app/Track/PLAY_TRACK';
+export const PREPARE_TRACK_TO_PLAY = 'app/Track/PLAY_TRACK';
+export const TRACK_READY_TO_PLAY = 'app/Track/TRACK_READY_TO_PLAY';
 export const PAUSE_TRACK = 'app/Track/PAUSE_TRACK';
 export const ADD_VARIANT_TO_CART = 'app/cart/ADD_VARIANT_TO_CART';
 export const SET_CART = 'app/cart/SET_CART';
