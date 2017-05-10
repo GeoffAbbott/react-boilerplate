@@ -48,7 +48,9 @@ export default function createRoutes(store) {
 
           import('containers/Playlist/sagas'),
 
-          import('containers/ShopifyProvider/sagas'),
+          import('containers/PopularAlbums/reducer'),
+
+          import('containers/PopularAlbums/sagas'),
 
           import('containers/HomePage'),
 
@@ -56,19 +58,22 @@ export default function createRoutes(store) {
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([playlistReducer, playlistSaga, shopifySaga, component]) => {
+        importModules.then(([playlistReducer, playlistSaga, popularAlbumsReducer, popularAlbumsSaga, component]) => {
 
           injectReducer('playlist', playlistReducer.default);
 
           injectSagas(playlistSaga.default);
 
-          injectSagas(shopifySaga.default);
+          injectReducer('popular.albums', popularAlbumsReducer.default);
+
+          injectSagas(popularAlbumsSaga.default);
 
           renderRoute(component);
 
         });
 
         importModules.catch(errorLoading);
+
       },
     }, {
       path: '/about',
@@ -203,6 +208,38 @@ export default function createRoutes(store) {
 
         });
 
+      },
+    }, {
+
+      path: '/news',
+
+      name: 'newsPage',
+
+      getComponent(nextState, cb) {
+
+        const importModules = Promise.all([
+
+          import('containers/NewsPage/reducer'),
+
+          import('containers/NewsPage/sagas'),
+
+          import('containers/NewsPage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([newsReducer, newsSaga, component]) => {
+
+          injectReducer('newsPage', newsReducer.default);
+
+          injectSagas(newsSaga.default);
+
+          renderRoute(component);
+
+        });
+
+        importModules.catch(errorLoading);
       },
     }, {
 

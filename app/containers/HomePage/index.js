@@ -12,7 +12,7 @@
 import React from 'react';
 import Playlist from 'containers/Playlist';
 import Lgtbbt from 'components/Lgtbbt';
-import PopularAlbums from 'containers/ProductCollection';
+import PopularAlbums from 'containers/PopularAlbums';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
