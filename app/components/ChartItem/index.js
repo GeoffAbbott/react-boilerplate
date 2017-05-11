@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router';
 import { prepareTrackToPlay } from 'containers/App/actions';
 import styles from '../../style-utils';
+import PlayButton from './play-white.png';
 
 const PaddedWrap = styled.div`
   margin: 7px 0;
@@ -73,6 +74,24 @@ const SubSubBanger = styled.div`
   width:100%;
   a{
     color:#999;
+  }
+`;
+
+const CTRLItem = styled.div`
+  position: absolute;
+  opacity: 0;
+  padding: 20px;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.3);
+  -webkit-transition: opacity 150ms;
+  -moz-transition: opacity 150ms;
+  transition: opacity 150ms;
+  top: 0;
+  left: 0;
+  z-index:99;
+  
+  &:hover{
+    opacity:1;
   }
 `;
 
@@ -262,6 +281,12 @@ class ChartItem extends React.PureComponent { // eslint-disable-line react/prefe
 
                 {this.getImage()}
 
+                <CTRLItem className="CTRL" onClick={() => this.props.handleTrackClicked(this.props.item._id._id)}>
+
+                  <img role="presentation" src={PlayButton} />
+
+                </CTRLItem>
+
               </Image>
 
               <ChartItemSection width="100%">
@@ -302,7 +327,7 @@ export function mapDispatchToProps(dispatch) {
 
   return {
 
-    handleTrackClicked: (track) => dispatch(prepareTrackToPlay(track.tracks[0].track._id)),
+    handleTrackClicked: (id) => dispatch (prepareTrackToPlay(id) ),
 
   };
 

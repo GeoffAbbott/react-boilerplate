@@ -74,7 +74,7 @@ class NavDropDown extends React.PureComponent { // eslint-disable-line react/pre
 
   render() {
 
-    if (!this.props.items.length) return (<div></div>);
+    if (!this.props.items.length) return null;
 
     return (
 

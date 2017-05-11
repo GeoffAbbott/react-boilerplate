@@ -280,6 +280,39 @@ export default function createRoutes(store) {
       },
     }, {
 
+      path: '/college/:handle',
+
+      name: 'collegePage',
+
+      getComponent(nextState, cb) {
+
+        const importModules = Promise.all([
+
+          import('containers/CollegePage/reducer'),
+
+          import('containers/CollegePage/sagas'),
+
+          import('containers/CollegePage'),
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([collegeReducer, collegeSaga, component]) => {
+
+          injectReducer('collegePage', collegeReducer.default);
+
+          injectSagas(collegeSaga.default);
+
+          renderRoute(component);
+
+        });
+
+        importModules.catch(errorLoading);
+
+      },
+    }, {
+
       path: ':artistName',
 
       name: 'bandPage',

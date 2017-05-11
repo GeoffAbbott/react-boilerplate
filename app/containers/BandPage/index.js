@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import FourOhFour from 'containers/NotFoundPage';
+import StubPage from 'containers/StubBandPage';
+import Banner from 'components/Banner';
 import { makeSelectBand, makeSelectLoading } from './selectors';
 import { loadBand } from './actions';
 
@@ -16,9 +18,11 @@ export class BandPage extends React.PureComponent { // eslint-disable-line react
 
   render() {
 
-    if (this.props.loading) return (<div>Loading</div>);
+    if (this.props.loading) return (<div>Loading...</div>);
 
     if (!this.props.loading && !this.props.band) return (<FourOhFour />);
+
+    if (!this.props.band.signed) return (<StubPage artist={this.props.band} />);
 
     return (
 
@@ -36,7 +40,7 @@ export class BandPage extends React.PureComponent { // eslint-disable-line react
 
         />
 
-        <h1>{this.props.band ? this.props.band.name : 'LOADING BAND'}</h1>
+        <Banner title={this.props.band.name} logoLink={this.props.band.colleges[0].shopify.url} collegeLogo={this.props.band.colleges[0].logoUrl} coverImage={this.props.band.coverArtUrl} />
 
       </div>
 

@@ -24,7 +24,8 @@ function chartReducer(state = initialState, action) {
     case LOAD_CHART:
 
       return state
-        .set('loading', true);
+        .set('loading', true)
+        .set('chart', false);
 
     case LOAD_CHART_SUCCESS:
 

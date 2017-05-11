@@ -1,4 +1,3 @@
-
 import { call, put, cancel, take, takeLatest } from 'redux-saga/effects';
 import { LOAD_BAND } from 'containers/BandPage/constants';
 import { bandLoaded, bandLoadingError } from 'containers/BandPage/actions';
