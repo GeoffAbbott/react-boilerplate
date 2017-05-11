@@ -12,8 +12,20 @@ injectGlobal`
   }
   body {
     font-family: 'Open Sans',sans-serif;
+    color:#51595d;
+    font-size: 16px;
   }
-
+  
+  a {
+    color:#51595d;
+    &:hover{
+      opacity:0.8;
+    }
+  }
+  a:hover {
+    text-decoration:none;
+  }
+  
   body.fontLoaded {
     font-family: 'Open Sans',sans-serif;
   }

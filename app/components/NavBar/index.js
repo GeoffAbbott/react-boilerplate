@@ -11,6 +11,7 @@ import NavItem from 'components/NavItem';
 import Cart from 'containers/Cart';
 import Logo from './logo.png';
 import Img from './Img';
+import Items from './model';
 
 const HeaderWrap = styled.div`
   width:100%;
@@ -30,23 +31,33 @@ const Nav = styled.ul`
 `;
 
 function NavBar() {
+
   return (
+
     <HeaderWrap>
+
       <LogoWrap className="logo-wrap">
+
         <Link to="/">
+
           <Img src={Logo} alt="CollegeBand Logo" />
+
         </Link>
+
       </LogoWrap>
+
       <Nav>
-        <NavItem title="Charts" href="/charts/band" />
-        <NavItem title="Artists" href="/artists/name" />
-        <NavItem title="Shop" href="/shop" />
-        <NavItem title="News" href="/news" />
-        <NavItem title="Add Band" href="/add-band" />
+
+        {Items.map((item, index) => <NavItem key={`item-${index}`} items={item.subs} title={item.title} href={item.link} />)}
+
         <Cart />
+
       </Nav>
+
     </HeaderWrap>
+
   );
+
 }
 
 NavBar.propTypes = {

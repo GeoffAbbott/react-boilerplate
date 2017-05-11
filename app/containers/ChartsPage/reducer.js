@@ -14,6 +14,7 @@ import {
 const initialState = fromJS({
   chart: false,
   loading: true,
+  error: false,
 });
 
 function chartReducer(state = initialState, action) {
